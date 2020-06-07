@@ -23,6 +23,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sentry-debug/', views.trigger_error),
     path('', views.index, name="survey.index"),
     path('my-surveys', views.my_surveys, name="survey.my_surveys"),
     path('surveys/<int:id>', views.view_questionnaire, name="survey.view_questionnaire"),

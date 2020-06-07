@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 def index(request):
     questionnaires = Questionnaire.objects.select_related('creator').order_by('-created_at')
     paginator = Paginator(questionnaires, 10)
