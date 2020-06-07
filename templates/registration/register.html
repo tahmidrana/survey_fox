@@ -1,0 +1,75 @@
+{% extends "base_auth.html" %}
+
+{% block title %}
+Survey Fox | Register
+{% endblock title %}
+
+{% block content %}
+<div class="rounded overflow-hidden border-r border-b border-l border-t border-gray-300 bg-white my-2">        
+    <div class="px-6 py-4">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        
+        <h3 class="font-bold text-xl text-gray-800 mb-6">Register</h3>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    First Name
+                    </label>
+                    {{ form.first_name }}
+                </div>
+                <div class="w-full md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Last Name
+                    </label>
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" for="{{ form.description.id_for_label }}">Username </label>
+                {{ form.username }}
+                <p class="text-red-500 text-xs italic">{{ form.username.errors }}</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" for="{{ form.email.id_for_label }}">{{ form.email.label_tag }} </label>
+                {{ form.email }}
+                <p class="text-red-500 text-xs italic">{{ form.email.errors }}</p>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" for="{{ form.password1.id_for_label }}">{{ form.password1.label_tag }} </label>
+                {{ form.password1 }}
+                <p class="text-red-500 text-xs italic">{{ form.password1.errors }}</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" for="{{ form.description.id_for_label }}">{{ form.password2.label_tag }} </label>
+                {{ form.password2 }}
+                <p class="text-red-500 text-xs italic">{{ form.password2.errors }}</p>
+            </div>
+                
+            <button type="submit" value="login" class="bg-blue-600 px-4 py-2 rounded border-gray-100 text-white" >Register</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        
+        
+        <p class="mt-2"><a href="{% url 'login' %}">Already Registered? Login</a></p>
+
+  </div>
+</div>
+
+  
+{% endblock %}

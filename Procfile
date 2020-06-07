@@ -1,0 +1,1 @@
+web: gunicorn survey_fox.wsgi --log-file -

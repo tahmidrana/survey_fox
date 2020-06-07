@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Survey Fox{% endblock %}</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body class="bg-gray-200">
+    <div id="app" class="w-full md:w-2/5 mx-auto ">
+        {% include 'nav.html' %}
+
+        <div class="mt-5">
+            {% block breadcumb %}
+            {% endblock breadcumb %}
+            
+            {{ message }}
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+        <footer class="text-center my-8">
+            <p class="text-center text-gray-500 text-xs">
+                &copy;2020 Survey Fox. All rights reserved.
+              </p>
+        </footer>
+    </div>
+    
+    
+
+    <script src="{% static 'js/app.js' %}"></script>
+
+    {% block scripts %}
+    <script type="text/javascript">
+        function confirmDelete() {
+            var res = confirm("Are you sure want to delete?")
+            if(res) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        function confirmPublished() {
+            var res = confirm("Are you sure want to publish the survey? You can't modify or unpublish once it is published")
+            if(res) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        function confirmClose() {
+            var res = confirm("Are you sure want to close the survey? This will be marked as complet once it is closed")
+            if(res) {
+                return true
+            } else {
+                return false
+            }
+        }
+    </script>
+    {% endblock scripts %}
+</body>
+</html>

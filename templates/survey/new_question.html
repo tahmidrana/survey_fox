@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block breadcumb %}
+<ul class="flex flex-row py-2">
+    <li class="text-gray-600 text-center"><a href="{% url 'survey.index' %}" class="pr-2">Home</a>/</li>
+    <li class="text-gray-600 text-center"><a href="{% url 'survey.view_questionnaire' id %}" class="px-2">Questionnaire</a>/</li>
+    <li class="text-gray-700 text-center"><a href="#" class="px-2">New Question</a></li>
+</ul>
+{% endblock breadcumb %}
+
+{% block content %}
+<div class="">
+    {% include 'messages.html' %}
+    <h3 class="font-bold text-xl text-gray-700 mb-4">New Question</h3>
+    <form action="{% url 'survey.new_question' id %}" method="POST" class="bg-white border-r border-b border-l border-t border-gray-300 rounded px-8 pt-6 pb-8 mb-4">
+        {% csrf_token %}
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.title.id_for_label }}">Question: </label>
+            {{ form.title }}
+            <p class="text-red-500 text-xs italic">{{ form.title.errors }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.answer_field1.id_for_label }}">Answer Field #1: </label>
+            {{ form.answer_field1 }}
+            <p class="text-red-500 text-xs italic">{{ form.answer_field1.errors }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.answer_field2.id_for_label }}">Answer Field #2: </label>
+            {{ form.answer_field2 }}
+            <p class="text-red-500 text-xs italic">{{ form.answer_field2.errors }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.answer_field3.id_for_label }}">Answer Field #3: </label>
+            {{ form.answer_field3 }}
+            <p class="text-red-500 text-xs italic">{{ form.answer_field3.errors }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.answer_field4.id_for_label }}">Answer Field #4: </label>
+            {{ form.answer_field4 }}
+            <p class="text-red-500 text-xs italic">{{ form.answer_field4.errors }}</p>
+        </div>
+
+        <div class="flex items-center justify-between">
+            <div></div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Save Question
+            </button>
+        </div>
+    </form>
+
+    
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+</script>
+{% endblock scripts %}

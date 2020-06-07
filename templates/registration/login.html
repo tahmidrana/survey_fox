@@ -1,0 +1,48 @@
+{% extends "base_auth.html" %}
+
+{% block title %}
+Survey Fox | Login
+{% endblock title %}
+
+{% block content %}
+<div class="rounded overflow-hidden border-r border-b border-l border-t border-gray-300 bg-white my-2">        
+    <div class="px-6 py-4">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        
+        <h3 class="font-bold text-xl text-gray-800 mb-6">Login</h3>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" for="{{ form.description.id_for_label }}">{{ form.username.label_tag }} </label>
+                {{ form.username }}
+                <p class="text-red-500 text-xs italic">{{ form.description.errors }}</p>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" for="{{ form.description.id_for_label }}">{{ form.password.label_tag }} </label>
+                {{ form.password }}
+                <p class="text-red-500 text-xs italic">{{ form.description.errors }}</p>
+            </div>
+                
+            <button type="submit" value="login" class="bg-blue-600 px-4 py-2 rounded border-gray-100 text-white" >Login</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p class="mt-2"><a href="{% url 'register' %}">Don't have an account? Register</a></p>
+
+  </div>
+</div>
+
+  
+{% endblock %}
