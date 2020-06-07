@@ -47,12 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'survey',
     'auth_app',
-    'debug_toolbar'
+    #'debug_toolbar'
 ]
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
